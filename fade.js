@@ -63,7 +63,7 @@ $(document).ready(function () {
   $("#button-close-donate").click(function () {
     $("#up-button").show("slow");
     $("#button-close-menu").hide();
-    $(".form-container").hide();
+    $(".form-container").hide("slow");
   });
 
   let nombre = document.getElementById("name");
