@@ -65,47 +65,51 @@
 
     <section class="presentation" id="presentation">
 
-      <h2>Bienvenidos a Proezas</h2>
-            
-      <p>Plataforma de crowdfunding</p>
+      <div class="presentation-text">
 
-      <h3>Tu donación, nuestra fuerza. ¡Juntos podemos! ❤️</h3>
+        <p>Bienvenidos a Proezas</p>
+            
+        <p>Plataforma de crowdfunding</p>
+  
+        <p>Tu donación, nuestra fuerza. ¡Juntos podemos! ❤️</p>
+
+      </div>
 
       <div id="gallery">
 
         <div class="mySlides">
-          <img src="./images/crowdfunding.png" alt="Imagen de portada" hidden>
+          <img src="./images/crowdfunding.png" alt="Imagen de portada">
         </div>
         
         <div class="mySlides">
-          <a href="blog1.html"><img src="./images/blog1.jpg" alt="Imagen de blog" hidden></a>   
+          <a href="blog1.html"><img src="./images/blog1.jpg" alt="Imagen de blog"></a>   
         </div>
         
         <div class="mySlides">
-          <img src="./images/crowdfunding2.png" alt="Imagen de portada" hidden>
+          <img src="./images/crowdfunding2.png" alt="Imagen de portada">
         </div>
         
         <div class="mySlides">
-          <a href="blog2.html"><img src="./images/blog2.jpg" alt="Imagen de blog" hidden></a>   
+          <a href="blog2.html"><img src="./images/blog2.jpg" alt="Imagen de blog"></a>   
         </div>
         
         <div class="mySlides">
-          <img src="./images/crowdfunding3.png" alt="Imagen de portada" hidden>
+          <img src="./images/crowdfunding3.png" alt="Imagen de portada" />
         </div>
         <div class="mySlides">
-          <a href="blog3.html"><img src="./images/blog3.jpg" alt="Imagen de blog" hidden></a>   
+          <a href="blog3.html"><img src="./images/blog3.jpg" alt="Imagen de blog" /></a>
         </div>
         
         <div class="mySlides">
-          <img src="./images/crowdfunding4.png" alt="Imagen de portada" hidden>
+          <img src="./images/crowdfunding4.png" alt="Imagen de portada" />
         </div>
 
         <div class="mySlides">
-          <a href="blog4.html"><img src="./images/blog4.jpg" alt="Imagen de blog" hidden></a>   
+          <a href="blog4.html"><img src="./images/blog4.jpg" alt="Imagen de blog" /></a>
         </div>
         
         <div class="mySlides">
-          <img src="./images/crowdfunding5.png" alt="Imagen de portada" hidden>
+          <img src="./images/crowdfunding5.png" alt="Imagen de portada" />
         </div>
 
         <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -392,47 +396,7 @@
 
   <script src="./jquery-1.12.4.min.js"></script>
   <script src="./fade.js"></script>
-
-<script>
-
-  let slideIndex = 1;
-  showSlides(slideIndex);
-  let autoplayInterval = null;
-  
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-  
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-  
-  function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" img-active", "");
-    }
-    slides[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].className += " img-active";
-  }
-  
-  function startAutoplay(interval) {
-     autoplayInterval = setInterval(() => {
-      plusSlides(1); // Navega a la siguiente imagen cada intervalo de tiempo.
-     }, interval);
-  }
-
-  // Iniciar autoplay con un intervalo de 3 segundos.
-  startAutoplay(3000);  
-
-</script>
+  <script src="./slider.js"></script>
   
 </body>
 
