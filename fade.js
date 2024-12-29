@@ -1,20 +1,20 @@
 $(document).ready(function () {
   //Scroll menu
-  $(window).scroll(function (event) {
-    var scrollPos = $(document).scrollTop();
-    console.log(scrollPos);
-    $("nav .menu a").each(function () {
-      var curLink = $(this);
-      var refElement = $(curLink.attr("href"));
+  // $(window).scroll(function (event) {
+  //   var scrollPos = $(document).scrollTop();
+  //   console.log(scrollPos);
+  //   $("nav .menu a").each(function () {
+  //     var curLink = $(this);
+  //     var refElement = $(curLink.attr("href"));
 
-      if (refElement.position().top <= scrollPos + 60) {
-        $("nav .menu a").removeClass("active");
-        curLink.addClass("active");
-      } else {
-        curLink.removeClass("active");
-      }
-    });
-  });
+  //     if (refElement.position().top <= scrollPos + 60) {
+  //       $("nav .menu a").removeClass("active");
+  //       curLink.addClass("active");
+  //     } else {
+  //       curLink.removeClass("active");
+  //     }
+  //   });
+  // });
 
   $("#up-button").click(function () {
     window.scroll({
@@ -83,10 +83,5 @@ $(document).ready(function () {
         opacity: 1,
       });
     }
-  });
-
-  $("#submit-btn").click(function () {
-    console.log("donar");
-    $(".form-container").hide("slow");
   });
 });

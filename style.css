@@ -302,17 +302,16 @@ header {
 }
 .button-blog {
     background-color: var(--purple);
-    color: var(--black);
     font-weight: 500;
     cursor: pointer;
     padding: 10px 20px;
-    
     border-radius: var(--radius-button);
     display: flex;
     justify-content: center;
     box-shadow: var(--shadow-container);
 }
 .button-blog > svg {
+    display: flex;
     width: var(--size-icons);
     transition: transform .3s ease-in-out;
     padding-left: 5px;

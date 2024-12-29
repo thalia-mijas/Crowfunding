@@ -4,24 +4,36 @@ const donations = [
     limit: 10000,
     progress: 8000,
     endDate: new Date("2024-12-28"),
+    percentage: function () {
+      return (this.progress * 100) / this.limit;
+    },
   },
   {
     id: "blog2",
     limit: 18000,
     progress: 18000,
     endDate: new Date("2024-12-29"),
+    percentage: function () {
+      return (this.progress * 100) / this.limit;
+    },
   },
   {
     id: "blog3",
     limit: 15000,
     progress: 5000,
     endDate: new Date("2024-12-30"),
+    percentage: function () {
+      return (this.progress * 100) / this.limit;
+    },
   },
   {
     id: "blog4",
     limit: 8000,
     progress: 600,
     endDate: new Date("2024-12-31"),
+    percentage: function () {
+      return (this.progress * 100) / this.limit;
+    },
   },
 ];
 
@@ -32,21 +44,18 @@ const paths = pathname.split("/");
 const splitPathname = paths[paths.length - 1].replaceAll(".html", "");
 const donation = donations.find((donation) => donation.id === splitPathname);
 
-//Calculamos porcentaje de avance en donacion
-function getPercent(pro, lim) {
-  var per = (pro * 100) / lim;
-  return per;
-}
-
 //Width de la barra de progreso de cada blog
-var blog = document.getElementById("progress");
-var don = getPercent(donation.progress, donation.limit);
-if (don < 8) {
-  donW = 8;
-} else {
-  donW = don;
+function changeWidth() {
+  var blog = document.getElementById("progress");
+  var don = donation.percentage();
+  if (don < 8) {
+    donW = 8;
+  } else {
+    donW = don;
+  }
+  blog.style.width = `${donW}%`;
 }
-blog.style.width = `${donW}%`;
+changeWidth();
 
 //Muestra cifras de recaudacion
 var divProgress = document.getElementsByTagName("div")[2];
@@ -86,19 +95,49 @@ function checkAvailability(days, perc) {
     return `Termina en: <br>${days} días ${hours} hrs ${minutes} min ${seconds} seg`;
   }
 
+  $("#button-donate").hide();
   return "Recaudación finalizada";
 }
 
 //Muestra porcentaje de recaudacion y tiempo restante
 var divClock = document.getElementsByTagName("div")[6];
 var pPercent = document.createElement("p");
-pPercent.innerHTML = `${don.toFixed(0)}% recaudado`;
+pPercent.innerHTML = `${donation.percentage().toFixed(0)}% recaudado`;
 divClock.appendChild(pPercent);
 var pRemaining = document.createElement("p");
-pRemaining.innerHTML = `${checkAvailability(daysOfMonth, don)}`;
+pRemaining.innerHTML = `${checkAvailability(
+  daysOfMonth,
+  donation.percentage()
+)}`;
 
 setInterval(() => {
-  pRemaining.innerHTML = `${checkAvailability(daysOfMonth, don)}`;
+  pRemaining.innerHTML = `${checkAvailability(
+    daysOfMonth,
+    donation.percentage()
+  )}`;
 }, 1000);
 
 divClock.appendChild(pRemaining);
+
+// Recibir datos del formulario de donacion
+const urlDonation = document.forms["donation-form"].action;
+const pathsDonation = urlDonation.split("=");
+const valueDonation = parseInt(pathsDonation[pathsDonation.length - 1]);
+const posDonation = donations.findIndex(
+  (donation) => donation.id === splitPathname
+);
+
+console.log(donations[posDonation].progress);
+console.log(valueDonation);
+
+if (!isNaN(valueDonation)) {
+  donations[posDonation].progress =
+    donations[posDonation].progress + parseInt(valueDonation);
+  changeWidth();
+  pPercent.innerHTML = `${donation.percentage().toFixed(0)}% recaudado`;
+  pRemaining.innerHTML = `${checkAvailability(
+    daysOfMonth,
+    donation.percentage()
+  )}`;
+  pRecolection.innerText = `$${donation.progress} de $${donation.limit}`;
+}
