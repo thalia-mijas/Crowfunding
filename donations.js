@@ -119,6 +119,11 @@ setInterval(() => {
 
 divClock.appendChild(pRemaining);
 
+//Setear donacion maxima
+const maxDonation = donation.limit - donation.progress;
+const inAmount = document.getElementsByTagName("input")[2];
+inAmount.setAttribute("max", maxDonation);
+
 // Recibir datos del formulario de donacion
 const urlDonation = document.forms["donation-form"].action;
 const pathsDonation = urlDonation.split("=");
