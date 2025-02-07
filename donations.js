@@ -1,10 +1,10 @@
-//Estos datos se utilizaron para inicializar los valores en la sessionStorage
+// Estos datos se utilizaron para inicializar los valores en la localStorage.
 //  const donations = [
 //   {
 //     id: "blog1",
 //     limit: 10000,
 //     progress: 8000,
-//     endDate: new Date("2025-05-28"),
+//     endDate: new Date("2025-01-28"),
 //   },
 //   {
 //     id: "blog2",
@@ -22,11 +22,11 @@
 //     id: "blog4",
 //     limit: 8000,
 //     progress: 600,
-//     endDate: new Date("2025-01-31"),
+//     endDate: new Date("2025-05-31"),
 //   },
 // ];
 
-const donationsStorage = localeStorage.getItem("donations");
+const donationsStorage = localStorage.getItem("donations");
 const donations = JSON.parse(donationsStorage);
 
 //Obtenemos direccion para saber desde que blog se esta accediendo
@@ -85,7 +85,6 @@ function checkAvailability(days, perc) {
     seconds = seconds % 60;
     minutes = minutes % 60;
     hours = hours % 24;
-    days = days % 24;
 
     $("#button-donate").show();
 
@@ -153,6 +152,6 @@ if (!isNaN(valueDonation)) {
 
   maxDonation();
 
-  const myJSON = JSON.stringify(donationsList);
-  localeStorage.setItem("donations", myJSON);
+  const myJSON = JSON.stringify(donations);
+  localStorage.setItem("donations", myJSON);
 }
