@@ -52,7 +52,7 @@ $(document).ready(function () {
   let nombre = document.getElementById("name");
   let deshabilitar = document.getElementById("anonymous");
 
-  deshabilitar.addEventListener("change", () => {
+  deshabilitar?.addEventListener("change", () => {
     if (deshabilitar.checked) {
       nombre.disabled = true;
       nombre.required = false;

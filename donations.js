@@ -1,41 +1,33 @@
-const donations = [
-  {
-    id: "blog1",
-    limit: 10000,
-    progress: 8000,
-    endDate: new Date("2024-12-28"),
-    percentage: function () {
-      return (this.progress * 100) / this.limit;
-    },
-  },
-  {
-    id: "blog2",
-    limit: 18000,
-    progress: 18000,
-    endDate: new Date("2024-12-29"),
-    percentage: function () {
-      return (this.progress * 100) / this.limit;
-    },
-  },
-  {
-    id: "blog3",
-    limit: 15000,
-    progress: 5000,
-    endDate: new Date("2024-12-30"),
-    percentage: function () {
-      return (this.progress * 100) / this.limit;
-    },
-  },
-  {
-    id: "blog4",
-    limit: 8000,
-    progress: 600,
-    endDate: new Date("2024-12-31"),
-    percentage: function () {
-      return (this.progress * 100) / this.limit;
-    },
-  },
-];
+//Estos datos se utilizaron para inicializar los valores en la sessionStorage
+//  const donations = [
+//   {
+//     id: "blog1",
+//     limit: 10000,
+//     progress: 8000,
+//     endDate: new Date("2025-05-28"),
+//   },
+//   {
+//     id: "blog2",
+//     limit: 18000,
+//     progress: 18000,
+//     endDate: new Date("2025-04-29"),
+//   },
+//   {
+//     id: "blog3",
+//     limit: 15000,
+//     progress: 5000,
+//     endDate: new Date("2025-03-30"),
+//   },
+//   {
+//     id: "blog4",
+//     limit: 8000,
+//     progress: 600,
+//     endDate: new Date("2025-01-31"),
+//   },
+// ];
+
+const donationsStorage = localeStorage.getItem("donations");
+const donations = JSON.parse(donationsStorage);
 
 //Obtenemos direccion para saber desde que blog se esta accediendo
 const href = window.location;
@@ -44,10 +36,15 @@ const paths = pathname.split("/");
 const splitPathname = paths[paths.length - 1].replaceAll(".html", "");
 const donation = donations.find((donation) => donation.id === splitPathname);
 
+function calcPercentage(progress, limit) {
+  const percentage = (progress * 100) / limit;
+  return percentage;
+}
+
 //Width de la barra de progreso de cada blog
 function changeWidth() {
   var blog = document.getElementById("progress");
-  var don = donation.percentage();
+  var don = calcPercentage(donation.progress, donation.limit);
   if (don < 8) {
     donW = 8;
   } else {
@@ -65,8 +62,8 @@ divProgress.appendChild(pRecolection);
 
 //Calcula dias del mes
 var monthDays = daysOfMonth(
-  donation.endDate.getMonth(),
-  donation.endDate.getFullYear()
+  new Date(donation.endDate).getMonth(),
+  new Date(donation.endDate).getFullYear()
 );
 
 function daysOfMonth(mth, yr) {
@@ -76,7 +73,7 @@ function daysOfMonth(mth, yr) {
 //Revisa si la causa aun esta activa
 function checkAvailability(days, perc) {
   var date = new Date();
-  var remainingTime = donation.endDate.getTime() - date.getTime();
+  var remainingTime = new Date(donation.endDate).getTime() - date.getTime();
 
   if (remainingTime > 0 && perc < 100) {
     let seconds = Math.floor(remainingTime / 1000);
@@ -102,27 +99,33 @@ function checkAvailability(days, perc) {
 //Muestra porcentaje de recaudacion y tiempo restante
 var divClock = document.getElementsByTagName("div")[6];
 var pPercent = document.createElement("p");
-pPercent.innerHTML = `${donation.percentage().toFixed(0)}% recaudado`;
+pPercent.innerHTML = `${calcPercentage(
+  donation.progress,
+  donation.limit
+).toFixed(0)}% recaudado`;
 divClock.appendChild(pPercent);
 var pRemaining = document.createElement("p");
 pRemaining.innerHTML = `${checkAvailability(
   daysOfMonth,
-  donation.percentage()
+  calcPercentage(donation.progress, donation.limit)
 )}`;
 
 setInterval(() => {
   pRemaining.innerHTML = `${checkAvailability(
     daysOfMonth,
-    donation.percentage()
+    calcPercentage(donation.progress, donation.limit)
   )}`;
 }, 1000);
 
 divClock.appendChild(pRemaining);
 
 //Setear donacion maxima
-const maxDonation = donation.limit - donation.progress;
-const inAmount = document.getElementsByTagName("input")[2];
-inAmount.setAttribute("max", maxDonation);
+function maxDonation() {
+  const maxDonation = donation.limit - donation.progress;
+  const inAmount = document.getElementsByTagName("input")[2];
+  inAmount.setAttribute("max", maxDonation);
+}
+maxDonation();
 
 // Recibir datos del formulario de donacion
 const urlDonation = document.forms["donation-form"].action;
@@ -132,17 +135,24 @@ const posDonation = donations.findIndex(
   (donation) => donation.id === splitPathname
 );
 
-console.log(donations[posDonation].progress);
-console.log(valueDonation);
-
 if (!isNaN(valueDonation)) {
   donations[posDonation].progress =
     donations[posDonation].progress + parseInt(valueDonation);
+
   changeWidth();
-  pPercent.innerHTML = `${donation.percentage().toFixed(0)}% recaudado`;
+
+  pPercent.innerHTML = `${calcPercentage(
+    donation.progress,
+    donation.limit
+  ).toFixed(0)}% recaudado`;
   pRemaining.innerHTML = `${checkAvailability(
     daysOfMonth,
-    donation.percentage()
+    calcPercentage(donation.progress, donation.limit)
   )}`;
   pRecolection.innerText = `$${donation.progress} de $${donation.limit}`;
+
+  maxDonation();
+
+  const myJSON = JSON.stringify(donationsList);
+  localeStorage.setItem("donations", myJSON);
 }
