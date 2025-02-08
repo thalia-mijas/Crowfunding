@@ -41,12 +41,14 @@ $(document).ready(function () {
   $("#button-donate").click(function () {
     $(".form-container").show("slow");
     $("#button-close-donate").show("slow");
+    $("#button-open-menu").hide("slow");
   });
 
   $("#button-close-donate").click(function () {
     $("#up-button").show("slow");
     $("#button-close-menu").hide();
     $(".form-container").hide("slow");
+    $("#button-open-menu").show("slow");
   });
 
   let nombre = document.getElementById("name");
