@@ -41,14 +41,28 @@ $(document).ready(function () {
   $("#button-donate").click(function () {
     $(".form-container").show("slow");
     $("#button-close-donate").show("slow");
-    $("#button-open-menu").hide("slow");
+    $("header").hide("slow");
   });
 
   $("#button-close-donate").click(function () {
     $("#up-button").show("slow");
     $("#button-close-menu").hide();
     $(".form-container").hide("slow");
-    $("#button-open-menu").show("slow");
+    $("header").show("slow");
+  });
+
+  //Formulario crear donacion
+  $("#button-create-donation").click(function () {
+    $(".form-container").show("slow");
+    $("#button-close-donate").show("slow");
+    $("header").hide("slow");
+  });
+
+  $("#button-close-donate").click(function () {
+    $("#up-button").show("slow");
+    $("#button-close-menu").hide();
+    $(".form-container").hide("slow");
+    $("header").show("slow");
   });
 
   let nombre = document.getElementById("name");
@@ -68,5 +82,33 @@ $(document).ready(function () {
         opacity: 1,
       });
     }
+  });
+
+  // Recibir datos del formulario de crear donacion
+  const urlDonationCreated = document.forms["create-donation"].action;
+  const pathsMail = urlDonationCreated.split("=");
+  const valueMail = pathsMail[2]
+    .replaceAll("%40", "@")
+    .replaceAll("&reason", "");
+
+  console.log(valueMail);
+
+  var divInfo = document.getElementById("info");
+  var pInfo = document.createElement("p");
+
+  pInfo.innerHTML = `Tu solicitud para la creación de una recaudación ha sido entregada a nuestro equipo para ser analizada.
+  Nos pondremos en contacto al correo ${valueMail} para continuar con el proceso.`;
+
+  divInfo.appendChild(pInfo);
+
+  $(".info-donation-created").show("slow");
+  $("#button-close-info").show("slow");
+  $("header").hide("slow");
+
+  $("#button-close-info").click(function () {
+    // $("#up-button").show("slow");
+    $(".info-donation-created").hide();
+    $("#button-close-info").hide("slow");
+    $("header").show("slow");
   });
 });

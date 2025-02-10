@@ -219,6 +219,8 @@
         </a>
 
       </div>
+
+      <a type="button" id="button-create-donation" class="button">Crear causa</a>
         
     </section>
     
@@ -377,6 +379,97 @@
       </div>
 
     </section>
+
+    <div class="form-container">
+
+      <form id="create-donation">
+
+        <a type="button" id="button-close-donate">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+          </svg>
+        </a>
+
+        <div class="title-donate">
+    
+            <a href="index.html">
+    
+                <img class="logo" src="./images/humanitarian-help.svg" alt="Logo proezas">
+          
+                <h1>Proezas</h1>
+      
+            </a>
+            
+        </div>
+    
+        <div class="requirements">
+
+            <div>
+                <label for="name">Nombres y apellidos:*</label>
+                <input type="text" placeholder="Ingrese datos de la persona encargada" name="name" id="name" required>  
+            </div>
+
+            <div>
+              <label for="mail">Correo:*</label>
+              <input type="email" placeholder="Ingrese datos de la persona encargada" name="mail" id="mail" required>  
+            </div>
+
+            <div>
+              <label for="reason">Razón principal:*</label>
+              <select name="reason">
+                <option value="animales">Animales</option>
+                <option value="artes">Artes creativas</option>
+                <option value="comunidad">Comunidad</option>
+                <option value="deportes">Deportes</option>
+                <option value="educacion">Educación</option>
+                <option value="emergencias">Emergencias</option>
+                <option value="eventos">Eventos</option>
+                <option value="familia">Familia</option>
+                <option value="ambiente">Medio ambiente</option>
+                <option value="salud">Salud</option>
+              </select>
+            </div>
+          
+            <div>
+                <label for="amount">Valor de recaudación:*</label>
+                <input type="number" placeholder="Ingrese el valor de su contribución" name="amount" id="amount" required>
+            </div>
+    
+            <p>* Campos obligatorios</p>
+            
+        </div>
+
+        <button type="submit" id="created-donation-btn">Crear</button>
+
+      </form>
+  
+    </div>
+
+    <div class="info-donation-created">
+
+      <div id="info">
+
+        <a type="button" id="button-close-info">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+          </svg>
+        </a>
+        
+        <div class="title-donate">
+    
+          <a href="index.html">
+  
+              <img class="logo" src="./images/humanitarian-help.svg" alt="Logo proezas">
+        
+              <h1>Proezas</h1>
+    
+          </a>
+          
+      </div>
+
+      </div>
+
+    </div>
 
   </main>
 
