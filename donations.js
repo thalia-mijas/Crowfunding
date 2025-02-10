@@ -4,25 +4,25 @@
 //     id: "blog1",
 //     limit: 10000,
 //     progress: 8000,
-//     endDate: new Date("2025-01-28"),
+//     endDate: new Date("2025-01-28 00:00:00"),
 //   },
 //   {
 //     id: "blog2",
 //     limit: 18000,
 //     progress: 18000,
-//     endDate: new Date("2025-04-29"),
+//     endDate: new Date("2025-04-29 00:00:00"),
 //   },
 //   {
 //     id: "blog3",
 //     limit: 15000,
 //     progress: 5000,
-//     endDate: new Date("2025-03-30"),
+//     endDate: new Date("2025-03-30 00:00:00"),
 //   },
 //   {
 //     id: "blog4",
 //     limit: 8000,
 //     progress: 600,
-//     endDate: new Date("2025-05-31"),
+//     endDate: new Date("2025-05-31 00:00:00"),
 //   },
 // ];
 
