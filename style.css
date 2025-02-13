@@ -175,23 +175,21 @@ header {
 }
 
 .presentation {
-    min-height: calc(100vh - var(--division-navbar) - var(--divisions));
-    height: auto;
+    max-height: calc(100vh - var(--division-navbar) - (2 * var(--divisions)));
     padding: var(--divisions);
+    width: calc(100vw - (4 * var(--divisions)));
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 .presentation-text{
     position: absolute;
-    padding-top: 60px;
     text-align: center;
     color: var(--white);
     z-index: 2;
     text-shadow: 2px 4px 4px rgba(0, 0,0, 0.6);
     background: color-mix(in srgb, var(--black), transparent 50%);
-    width: calc(100vw - 40px);
-    height: calc(100vh - var(--division-navbar) - var(--divisions) - 80px);
+    width: calc(100% - (2* var(--divisions)));
+    height: calc(100% - (6 * var(--divisions)));
     border-radius: var(--radius);
 }
 .presentation-text p{
@@ -206,14 +204,20 @@ header {
 .presentation-text p:nth-child(3) {
     font-size: x-large;
 }
-.gallery {
-    width: 100%;
+#gallery {
+    width: calc(100vw - 1px - (2 * var(--divisions)));
+    height: calc(100vh + var(--divisions));
+}
+.mySlides {
+    width: calc(100% - (2* var(--divisions)));
+    height: calc(100% - (6 * var(--divisions)));
 }
 .mySlides img {
-    width: calc(100vw - 40px);
+    width: calc(100% + var(--divisions));;
     object-fit: cover;
-    height: calc(100vh - var(--division-navbar) - var(--divisions) - 20px);
+    height: calc(100% - (1 * var(--divisions)));
     border-radius: var(--radius);
+    overflow: hidden;
 }
 .prev, .next {
     cursor: pointer;
@@ -223,14 +227,14 @@ header {
     padding: var(--divisions);
     color: var(--white);
     font-weight: bold;
-    transition: 0.6s ease;
     z-index: 5;
 }
 .next {
-    right: 11px;
+    right: 0;
     border-radius: var(--radius) 0 0 var(--radius);
 }
 .prev {
+    left: 0;
     border-radius: 0 var(--radius) var(--radius) 0;
 }
 .prev:hover, .next:hover {
@@ -242,6 +246,7 @@ header {
     position: absolute;
     bottom: 35px;
     z-index: 5;
+    align-self: center;
 }
 .dot {
     cursor: pointer;
