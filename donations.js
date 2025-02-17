@@ -26,6 +26,7 @@
 //   },
 // ];
 
+//Se obtiene datos de la localStorage
 const donationsStorage = localStorage.getItem("donations");
 const donations = JSON.parse(donationsStorage);
 
@@ -36,12 +37,13 @@ const paths = pathname.split("/");
 const splitPathname = paths[paths.length - 1].replaceAll(".html", "");
 const donation = donations.find((donation) => donation.id === splitPathname);
 
+//Se calcula porcentaje de avance en la donacion
 function calcPercentage(progress, limit) {
   const percentage = (progress * 100) / limit;
   return percentage;
 }
 
-//Width de la barra de progreso de cada blog
+//Seactualiza width de la barra de progreso de cada blog
 function changeWidth() {
   var blog = document.getElementById("progress");
   var don = calcPercentage(donation.progress, donation.limit);
@@ -60,7 +62,7 @@ var pRecolection = document.createElement("p");
 pRecolection.innerText = `$${donation.progress} de $${donation.limit}`;
 divProgress.appendChild(pRecolection);
 
-//Calcula dias del mes
+//Calcula dias del mes para utilizarlo en el conteo regresivo
 var monthDays = daysOfMonth(
   new Date(donation.endDate).getMonth(),
   new Date(donation.endDate).getFullYear()
@@ -70,7 +72,7 @@ function daysOfMonth(mth, yr) {
   return new Date(yr, mth, 0).getDate();
 }
 
-//Revisa si la causa aun esta activa
+//Revisa si la causa aun esta activa tomando en cuenta fecha y valor actual de donacion
 function checkAvailability(days, perc) {
   var date = new Date();
   var remainingTime = new Date(donation.endDate).getTime() - date.getTime();
@@ -118,7 +120,7 @@ setInterval(() => {
 
 divClock.appendChild(pRemaining);
 
-//Setear donacion maxima
+//Setear donacion maxima que se puede realizar
 function maxDonation() {
   const maxDonation = donation.limit - donation.progress;
   const inAmount = document.getElementsByTagName("input")[2];
@@ -126,7 +128,7 @@ function maxDonation() {
 }
 maxDonation();
 
-// Recibir datos del formulario de donacion
+//Recibir datos del formulario de donacion
 const urlDonation = document.forms["donation-form"].action;
 const pathsDonation = urlDonation.split("=");
 const valueDonation = parseInt(pathsDonation[pathsDonation.length - 1]);

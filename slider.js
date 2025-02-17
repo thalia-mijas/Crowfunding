@@ -1,18 +1,20 @@
 let slideIndex = 1;
 let autoplayInterval = null;
-showSlides(slideIndex);
 
+//Visualizar imagen anterior o siguiente con prev o next
 function plusSlides(n) {
   showSlides((slideIndex += n));
 }
 
+//Visualizar imagen que se elige en el selector
 function currentSlide(n) {
   showSlides((slideIndex = n));
 }
 
+//Cambia el estado de las imagenes en el slide
 function showSlides(n) {
   let i;
-  let slides = document.getElementsByClassName("mySlides");
+  let slides = document.getElementsByClassName("my-slides");
   let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {
     slideIndex = 1;
@@ -29,10 +31,12 @@ function showSlides(n) {
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].className += " img-active";
 }
+showSlides(slideIndex);
 
+// Navega a la siguiente imagen cada intervalo de tiempo.
 function startAutoplay(interval) {
   autoplayInterval = setInterval(() => {
-    plusSlides(1); // Navega a la siguiente imagen cada intervalo de tiempo.
+    plusSlides(1);
   }, interval);
 }
 
