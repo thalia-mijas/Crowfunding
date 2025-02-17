@@ -208,11 +208,11 @@ header {
     width: calc(100vw - 1px - (2 * var(--divisions)));
     height: calc(100vh + var(--divisions));
 }
-.mySlides {
+.my-slides {
     width: calc(100% - (2* var(--divisions)));
     height: calc(100% - (6 * var(--divisions)));
 }
-.mySlides img {
+.my-slides img {
     width: calc(100% + var(--divisions));;
     object-fit: cover;
     height: calc(100% - (1 * var(--divisions)));
